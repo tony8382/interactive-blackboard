@@ -9,6 +9,11 @@
 
 ---
 
+🎉 **來玩看看吧**
+立即回味當年的感動！👉 [立即試玩](https://tony8382.github.io/interactive-blackboard/)  
+![APP screenshot](footage/blackboard.png)
+
+
 ## 🏗️ 架構比較 (Architecture Comparison)
 ### 系統運作流程 (System Flow)
 
@@ -42,7 +47,7 @@ graph TD
 
 | 特色 | 舊版 Legacy (2015) | 現代版 Modern (2025) |
 | :--- | :--- | :--- |
-| **技術堆疊** | jQuery, Parse.com, Java (Android) | Next.js 14, TypeScript, Firebase |
+| **技術堆疊** | jQuery, Parse.com, Java (Android) | Next.js 16, TypeScript, Firebase |
 | **輸入方式** | SMS 簡訊 (簡訊費用) | Web 輸入 (免費) |
 | **延遲 (Latency)** | 高 (電信傳輸 + 輪詢) | 極低 (WebSocket 實時監聽) |
 | **視覺效果** | 靜態圖片背景 + 簡易動畫 | 復刻黑板材質 + 隨機紙張 + 流暢彈出動畫 |
@@ -71,7 +76,7 @@ graph TD
 
 ## 🛠 技術堆疊 (Tech Stack)
 
-*   **框架**: [Next.js 14](https://nextjs.org/) (App Router)
+*   **框架**: [Next.js 16+](https://nextjs.org/) (App Router)
 *   **語言**: TypeScript
 *   **樣式**: Tailwind CSS, shadcn/ui
 *   **資料庫**: Firebase Firestore
