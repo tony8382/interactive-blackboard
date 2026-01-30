@@ -75,8 +75,14 @@ export function MessageInput({ onMessagePosted }: MessageInputProps) {
                     </Button>
                 </form>
                 {/* Visual Hint */}
-                <div className="mt-2 text-xs text-stone-500 text-center">
-                    (建議: 簡短的祝福更令人印象深刻)
+                <div className="mt-2 text-xs text-center space-y-1">
+                    <div className="text-stone-500">
+                        💡 建議：簡短的祝福更令人印象深刻
+                    </div>
+                    <div className="text-amber-600 font-semibold flex items-center justify-center gap-1">
+                        <span>⚠️</span>
+                        <span>送出後將永久保留，無法刪除</span>
+                    </div>
                 </div>
             </DialogContent>
         </Dialog>
