@@ -43,7 +43,7 @@ graph TD
 | 特色 | 舊版 Legacy (2015) | 現代版 Modern (2025) |
 | :--- | :--- | :--- |
 | **技術堆疊** | jQuery, Parse.com, Java (Android) | Next.js 14, TypeScript, Firebase |
-| **輸入方式** | SMS 簡訊 (需電費) | Web 表單 (免費/無門檻) |
+| **輸入方式** | SMS 簡訊 (簡訊費用) | Web 輸入 (免費) |
 | **延遲 (Latency)** | 高 (電信傳輸 + 輪詢) | 極低 (WebSocket 實時監聽) |
 | **視覺效果** | 靜態圖片背景 + 簡易動畫 | 復刻黑板材質 + 隨機紙張 + 流暢彈出動畫 |
 
