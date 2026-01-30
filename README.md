@@ -10,30 +10,20 @@
 ---
 
 ## 🏗️ 架構比較 (Architecture Comparison)
-
-### 傳統簡訊留言板 (Traditional SMS) vs 現代網頁留言板 (Modern Web)
+### 系統運作流程 (System Flow)
 
 ```mermaid
 graph TD
-    subgraph Legacy [傳統簡訊架構]
-        User1[使用者] -->|SMS 簡訊| Telecom[電信業者]
-        Telecom -->|Polling/Push| Server[後端伺服器]
-        Server -->|Update| Database[(資料庫)]
-        Admin[管理員] -->|Refresh| Dashboard[後台顯示]
-        
-        style Legacy fill:#f9f,stroke:#333
-    end
-
-    subgraph Modern [現代 Web 架構]
-        User2[使用者] -->|HTTP/WebSocket| Firebase[Firebase Cloud]
-        Firebase -->|Realtime Sync| Client[前端頁面]
-        Client -->|Animation| UI[黑板動畫]
-        
-        style Modern fill:#bbf,stroke:#333
-    end
+    User[使用者輸入留言] --> Filter{髒話過濾檢查}
+    
+    Filter -->|⛔ 包含髒話| Warn[前端攔截並顯示警告]
+    Filter -->|✅ 檢查通過| DB[(Firebase Firestore)]
+    
+    DB -->|onSnapshot 即時推送| Client[前端更新畫面]
+    Client -->|Animation| UI[黑板貼紙動畫]
 ```
 
-### 系統運作流程 (System Flow)
+### 詳細時序圖 (Sequence Diagram)
 
 ```mermaid
 sequenceDiagram
