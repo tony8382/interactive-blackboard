@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Ma_Shan_Zheng } from "next/font/google"; // Import cute font
+import { Geist, Geist_Mono, Noto_Serif_TC } from "next/font/google"; // Import cute font
 import { Toaster } from "sonner"; // Import Toaster
 import "./globals.css";
 
@@ -14,10 +14,9 @@ const geistMono = Geist_Mono({
 });
 
 // Cute font for stickers
-const cuteFont = Ma_Shan_Zheng({
-  weight: "400",
-  subsets: ["latin"], // Note: Google Fonts subsets might be limited for Chinese, usually 'latin' is basic. 
-  // Next.js will try to download subset. For Chinese fonts, often we just use preload: false if subsets not available.
+const cuteFont = Noto_Serif_TC({
+  weight: ["400", "700"],
+  subsets: ["latin"],
   preload: false,
   variable: "--font-cute",
 });
