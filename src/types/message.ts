@@ -8,4 +8,5 @@ export interface Message {
 export interface MessageService {
     getMessages(): Promise<Message[]>;
     postMessage(content: string): Promise<Message>;
+    subscribeToMessages?(callback: (messages: Message[]) => void): () => void; // Optional for implementation that supports it
 }

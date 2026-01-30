@@ -1,6 +1,6 @@
 import { Message, MessageService } from "@/types/message";
 import { db } from "@/lib/firebase";
-import { collection, addDoc, getDocs, query, orderBy, limit, Timestamp } from "firebase/firestore";
+import { collection, addDoc, getDocs, query, orderBy, limit, Timestamp, onSnapshot } from "firebase/firestore";
 import { isProfane } from "@/lib/profanity";
 
 const COLLECTION_NAME = "messages";
@@ -22,19 +22,32 @@ export class FirebaseMessageService implements MessageService {
                 });
             });
 
-            // Implement Weighted Random Logic here if needed similar to mock
-            // For now, return recent ones.
-            // To strictly follow "retrieve random past messages":
-            // Firestore doesn't support random natively easily.
-            // We can fetch a larger batch and pick randomly on client, 
-            // or use a random index field in DB (advanced).
-            // Given the "Small" scope, client-side filtering of 50 items is fine for MVP.
-
             return messages;
         } catch (error) {
             console.error("Error fetching messages:", error);
             return [];
         }
+    }
+
+    // Realtime subscription
+    subscribeToMessages(callback: (messages: Message[]) => void): () => void {
+        // Listen to the last 20 messages for realtime updates
+        const q = query(collection(db, COLLECTION_NAME), orderBy("createdAt", "desc"), limit(20));
+
+        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+            const messages: Message[] = [];
+            querySnapshot.forEach((doc) => {
+                const data = doc.data();
+                messages.push({
+                    id: doc.id,
+                    content: data.content,
+                    createdAt: data.createdAt?.toMillis ? data.createdAt.toMillis() : Date.now(),
+                });
+            });
+            callback(messages);
+        });
+
+        return unsubscribe;
     }
 
     async postMessage(content: string): Promise<Message> {
