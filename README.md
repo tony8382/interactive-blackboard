@@ -95,9 +95,9 @@ graph TD
     ```
 
 2.  環境變數設定
-    複製 `.env.local.example` 為 `.env.local` 並填入你的 Firebase 設定。
+    複製 `.env.example` 為 `.env.local` 並填入你的 Firebase 設定。
     ```bash
-    cp .env.local.example .env.local
+    cp .env.example .env.local
     ```
 
 3.  啟動開發伺服器
