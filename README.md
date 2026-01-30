@@ -9,7 +9,51 @@
 
 ---
 
-## 🏗 架構演進比較 (Architecture Comparison)
+## 🏗️ 架構比較 (Architecture Comparison)
+
+### 傳統簡訊留言板 (Traditional SMS) vs 現代網頁留言板 (Modern Web)
+
+```mermaid
+graph TD
+    subgraph Legacy [傳統簡訊架構]
+        User1[使用者] -->|SMS 簡訊| Telecom[電信業者]
+        Telecom -->|Polling/Push| Server[後端伺服器]
+        Server -->|Update| Database[(資料庫)]
+        Admin[管理員] -->|Refresh| Dashboard[後台顯示]
+        
+        style Legacy fill:#f9f,stroke:#333
+    end
+
+    subgraph Modern [現代 Web 架構]
+        User2[使用者] -->|HTTP/WebSocket| Firebase[Firebase Cloud]
+        Firebase -->|Realtime Sync| Client[前端頁面]
+        Client -->|Animation| UI[黑板動畫]
+        
+        style Modern fill:#bbf,stroke:#333
+    end
+```
+
+### 系統運作流程 (System Flow)
+
+```mermaid
+sequenceDiagram
+    participant User as 使用者
+    participant App as 網頁應用 (Next.js)
+    participant FB as Firebase Firestore
+    participant Filter as 髒話過濾器
+
+    User->>App: 輸入留言
+    App->>Filter: 檢查內容 (Mock/Async)
+    alt 包含不雅字眼
+        Filter-->>App: 攔截並警告
+        App-->>User: 顯示錯誤訊息
+    else 內容正常
+        App->>FB: 寫入留言 (addDoc)
+        FB-->>App: 確認寫入成功
+        FB->>App: 實時推送新留言 (onSnapshot)
+        App->>User: 顯示貼紙動畫
+    end
+```
 
 ### 1. 舊版架構 (Legacy Architecture - 2015)
 當時行動網路尚未全面普及 (4G剛起步)，且為了整合傳統電信簡訊與大螢幕，架構相當複雜且成本較高：

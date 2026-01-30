@@ -1,7 +1,7 @@
 import { Message, MessageService } from "@/types/message";
 import { db } from "@/lib/firebase";
 import { collection, addDoc, getDocs, query, orderBy, limit, Timestamp, onSnapshot } from "firebase/firestore";
-import { isProfane } from "@/lib/profanity";
+import { isProfaneAsync } from "@/lib/profanity";
 
 const COLLECTION_NAME = "messages";
 
@@ -49,9 +49,8 @@ export class FirebaseMessageService implements MessageService {
 
         return unsubscribe;
     }
-
     async postMessage(content: string): Promise<Message> {
-        if (isProfane(content)) {
+        if (await isProfaneAsync(content)) {
             throw new Error("請勿使用髒話！");
         }
 

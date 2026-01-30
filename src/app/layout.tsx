@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Noto_Serif_TC } from "next/font/google"; // Import cute font
 import { Toaster } from "sonner"; // Import Toaster
+import { ProfanityLoader } from "@/components/common/ProfanityLoader";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -36,6 +37,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${cuteFont.variable} antialiased`}
       >
+        <ProfanityLoader />
         {children}
         <Toaster position="top-center" richColors />
       </body>
