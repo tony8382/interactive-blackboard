@@ -26,7 +26,6 @@ export function Board() {
                 <MessageSticker
                     key={msg.key}
                     message={msg}
-                    index={index}
                     paperIndex={msg.paperIndex}
                     style={{
                         top: `${msg.y}%`,

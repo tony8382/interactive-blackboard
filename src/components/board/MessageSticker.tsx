@@ -14,6 +14,19 @@ interface MessageStickerProps {
 export function MessageSticker({ message, className, style, paperIndex }: MessageStickerProps) {
     const [fadeIn, setFadeIn] = useState(false);
     const [moveToPosition, setMoveToPosition] = useState(false);
+    const [initialSize, setInitialSize] = useState(820);
+
+    useEffect(() => {
+        const updateSize = () => {
+            const h = window.innerHeight;
+            const size = Math.min(h * 0.8, 850);
+            setInitialSize(size);
+        };
+
+        updateSize();
+        window.addEventListener('resize', updateSize);
+        return () => window.removeEventListener('resize', updateSize);
+    }, []);
 
     const [finalPaperIndex] = useState(() => {
         if (paperIndex !== undefined) return paperIndex;
@@ -58,12 +71,12 @@ export function MessageSticker({ message, className, style, paperIndex }: Messag
                 backgroundImage: `url(${paperImage})`,
                 backgroundSize: "cover",
                 boxShadow: "10px 10px 30px rgba(0,0,0,0.3)",
-                // Stage 1: Large at center (820x820)
-                // Stage 2: Normal size at target position (320x320)
+                // Stage 1: Dynamic large size at center (referenced to window height)
+                // Stage 2: Fixed small size at target position (320x320)
                 left: moveToPosition ? style?.left : '50%',
                 top: moveToPosition ? style?.top : '50%',
-                width: moveToPosition ? '320px' : '820px',
-                height: moveToPosition ? '320px' : '820px',
+                width: moveToPosition ? '320px' : `${initialSize}px`,
+                height: moveToPosition ? '320px' : `${initialSize}px`,
                 opacity: fadeIn ? 1 : 0,
                 transform: moveToPosition
                     ? `${style?.transform || 'rotate(0deg)'}`
