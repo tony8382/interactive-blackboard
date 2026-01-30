@@ -3,8 +3,8 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
     
-    // Allow anyone to read and create messages
-    match /messages/{messageId} {
+    // Allow anyone to read and create blackboard-messages
+    match /blackboard-messages/{messageId} {
       allow read, create: if true;
     }
 

@@ -3,7 +3,7 @@ import { db } from "@/lib/firebase";
 import { collection, addDoc, getDocs, query, orderBy, limit, Timestamp, onSnapshot } from "firebase/firestore";
 import { isProfaneAsync } from "@/lib/profanity";
 
-const COLLECTION_NAME = "messages";
+const COLLECTION_NAME = "blackboard-messages";
 
 export class FirebaseMessageService implements MessageService {
     async getMessages(): Promise<Message[]> {
