@@ -50,7 +50,6 @@ graph TD
 | **技術堆疊** | jQuery, Parse.com, Java (Android) | Next.js 16, TypeScript, Firebase |
 | **輸入方式** | SMS 簡訊 (簡訊費用) | Web 輸入 (免費) |
 | **延遲 (Latency)** | 高 (電信傳輸 + 輪詢) | 極低 (WebSocket 實時監聽) |
-| **視覺效果** | 靜態圖片背景 + 簡易動畫 | 復刻黑板材質 + 隨機紙張 + 流暢彈出動畫 |
 
 ---
 
