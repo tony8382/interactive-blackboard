@@ -16,7 +16,8 @@ export function MessageSticker({ message, className, style, index = 0, paperInde
     const [mounted, setMounted] = useState(false);
 
     const finalPaperIndex = paperIndex || (Math.floor(Math.random() * 6) + 1);
-    const paperImage = `/img/paper${finalPaperIndex}.jpg`;
+    const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+    const paperImage = `${basePath}/img/paper${finalPaperIndex}.jpg`;
 
     useEffect(() => {
         // Trigger entrance animation

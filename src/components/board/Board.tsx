@@ -7,8 +7,14 @@ import { useBoard } from "@/hooks/useBoard";
 export function Board() {
     const { activeMessages, loading, handlePostMessage } = useBoard();
 
+    const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+    const bgImage = `${basePath}/img/board.jpg`;
+
     return (
-        <div className="relative w-full h-screen overflow-hidden bg-stone-800 bg-[url('/img/board.jpg')] bg-contain bg-center bg-no-repeat">
+        <div
+            className="relative w-full h-screen overflow-hidden bg-stone-800 bg-contain bg-center bg-no-repeat"
+            style={{ backgroundImage: `url('${bgImage}')` }}
+        >
 
             {loading && activeMessages.length === 0 && (
                 <div className="absolute inset-0 flex items-center justify-center text-white">
