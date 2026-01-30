@@ -30,7 +30,7 @@ export function MessageSticker({ message, className, style, index = 0, paperInde
             className={cn(
                 "absolute p-8 shadow-lg w-[320px] h-[320px] flex flex-col justify-center items-center text-center select-none transition-all duration-1000 ease-out",
                 // Typography
-                "font-bold tracking-widest text-[#2c1e13] font-[family-name:var(--font-cute)]", // Remove fixed size, handled by inner logic
+                "font-black tracking-widest text-[#2c1e13] font-[family-name:var(--font-cute)]", // Remove fixed size, handled by inner logic
                 className
             )}
             style={{
@@ -49,11 +49,18 @@ export function MessageSticker({ message, className, style, index = 0, paperInde
                 className="flex-grow flex items-center justify-center break-words w-full px-4"
                 style={{ lineHeight: "1.4" }}
             >
-                <div className={cn(
-                    // Dynamic font sizing
-                    message.content.length <= 6 ? "text-5xl" :
-                        message.content.length <= 12 ? "text-4xl" : "text-3xl",
-                )}>
+                <div
+                    className={cn(
+                        // Dynamic font sizing
+                        message.content.length <= 6 ? "text-5xl" :
+                            message.content.length <= 12 ? "text-4xl" : "text-3xl",
+                    )}
+                    style={{
+                        textShadow: "1px 1px 2px rgba(255,255,255,0.9), 2px 2px 4px rgba(255,255,255,0.7), 3px 3px 6px rgba(255,255,255,0.5)",
+                        WebkitTextStroke: "0.5px rgba(44,30,19,0.8)",
+                        letterSpacing: "0.05em"
+                    }}
+                >
                     {message.content}
                 </div>
             </div>
