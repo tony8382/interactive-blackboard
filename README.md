@@ -106,3 +106,43 @@ graph TD
     ```
 
 開啟瀏覽器訪問 [http://localhost:3000](http://localhost:3000) 即可看到結果。
+
+---
+
+## 📜 歷史回顧 (Memorial)
+
+> **「擁抱未來」** — 國立彰化師範大學 104 級畢業典禮
+
+為了紀念這段青春回憶，我們將 2015 年當年的活動網頁存檔保留了下來。即使時光流逝，那份祝福與感動依然存在。
+<div style="display: flex; gap: 10px;">
+  <img src="footage/legacy_2015.jpg" width="30%" />
+  <img src="footage/2015061310104.jpg" width="30%" />
+  <img src="footage/2015061310108.jpg" width="30%" />
+</div>
+
+---
+
+## 📦 部署說明 (Deployment Guide)
+
+本專案已設定好 **GitHub Pages** 的自動部署流程。若您 Fork 了本專案，請按照以下步驟設定，以確保網站能正常運作並連線至您的 Firebase。
+
+### 1. 設定 GitHub Secrets
+由於資安考量，`.env.local` 不會被上傳至 GitHub。您必須將 Firebase 的敏感資訊設定在 GitHub Repository 的 Secrets 中。
+
+進入您的 GitHub Repository 設定頁面：
+`Settings` > `Secrets and variables` > `Actions` > `New repository secret`
+
+請依序新增以下 Secrets (值請參考您的 `.env.local`):
+
+*   `NEXT_PUBLIC_FIREBASE_API_KEY`
+*   `NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN`
+*   `NEXT_PUBLIC_FIREBASE_PROJECT_ID`
+*   `NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET`
+*   `NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID`
+*   `NEXT_PUBLIC_FIREBASE_APP_ID`
+
+### 2. 推送程式碼
+設定完成後，只要將程式碼 Push 到 `main` 分支，GitHub Actions 就會自動觸發 Build 與 Deploy 流程。
+
+### 3. 確認部署狀態
+您可以到 `Actions` 分頁查看部署進度。若部署成功，您的網站將會在 `https://<你是的帳號>.github.io/interactive-blackboard/` 上線。
