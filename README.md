@@ -23,28 +23,6 @@ graph TD
     Client -->|Animation| UI[黑板貼紙動畫]
 ```
 
-### 詳細時序圖 (Sequence Diagram)
-
-```mermaid
-sequenceDiagram
-    participant User as 使用者
-    participant App as 網頁應用 (Next.js)
-    participant FB as Firebase Firestore
-    participant Filter as 髒話過濾器
-
-    User->>App: 輸入留言
-    App->>Filter: 檢查內容 (Mock/Async)
-    alt 包含不雅字眼
-        Filter-->>App: 攔截並警告
-        App-->>User: 顯示錯誤訊息
-    else 內容正常
-        App->>FB: 寫入留言 (addDoc)
-        FB-->>App: 確認寫入成功
-        FB->>App: 實時推送新留言 (onSnapshot)
-        App->>User: 顯示貼紙動畫
-    end
-```
-
 ### 1. 舊版架構 (Legacy Architecture - 2015)
 當時行動網路尚未全面普及 (4G剛起步)，且為了整合傳統電信簡訊與大螢幕，架構相當複雜且成本較高：
 
