@@ -85,6 +85,7 @@ export function useBoard() {
             let nextMsg: Message | undefined;
 
             if (priorityQueue.length > 0) {
+                // Priority Queue (New Messages Only)
                 nextMsg = priorityQueue[0];
                 setPriorityQueue(prev => prev.slice(1));
             }
@@ -120,44 +121,15 @@ export function useBoard() {
         return () => clearInterval(interval);
     }, [loading, messageQueue, priorityQueue]);
 
-    // 5. Handle Posting (Optimistic UI)
+    // 5. Handle Posting (Wait for Snapshot)
     const handlePostMessage = async (content: string) => {
-        // Optimistic Add
-        const tempId = `temp-${Date.now()}`;
-        const tempMsg: Message = {
-            id: tempId,
-            content,
-            createdAt: Date.now()
-        };
-
-        const pos = getRandomPosition();
-        const paperIndex = Math.floor(Math.random() * 6) + 1;
-
-        const optimisticSticker: PositionedMessage = {
-            ...tempMsg,
-            ...pos,
-            key: tempId,
-            paperIndex
-        };
-
-        // Force add to view immediately
-        setActiveMessages(prev => {
-            const next = [...prev, optimisticSticker];
-            // Ensure we don't exceed max too much, but for user feedback, shrinking old ones is fine.
-            return next.length > MAX_STICKERS ? next.slice(next.length - MAX_STICKERS) : next;
-        });
-
         try {
             await messageService.postMessage(content);
-            // Success
+            toast.success("留言成功！等待黑板顯示...");
         } catch (error: any) {
             console.error(error);
             toast.error("留言失敗", { description: error.message || "請稍後再試" });
-            // Rollback optimistic update
-            setActiveMessages(prev => prev.filter(m => m.key !== tempId));
-            // Throw error so input knows? Or Input just trusts us?
-            // Input expects void or promise.
-            throw error; // Let input handle UI state (loading) if needed, but we handled toast
+            throw error;
         }
     };
 
